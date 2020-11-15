@@ -40,6 +40,10 @@ def scraper(subject, semester):
 
 
 # MAIN
+
+# averageGpa: Double
+# rating: Long
+# reported: Long
 cred = credentials.Certificate('osugrades-287d6-firebase-adminsdk-85eqn-e03289bdcc.json')
 firebase_admin.initialize_app(cred)
 
@@ -50,12 +54,15 @@ semester_code = sys.argv[2]  # semseter number 1208
 
 course_list = scraper(subject_code, semester_code)
 
+# populate Firebase
 for course in course_list:
     doc_ref = db.collection('courses').document(course.courseName)
     doc_ref.set({
         'averageGpa': 0.00,
         'course': course.courseName,
-        'rating': 0,
-        'reported': 0
+        'rating': 0.00,
+        'reported': 0.00,
+        'professors': []
     })
 
+print("Done!")
