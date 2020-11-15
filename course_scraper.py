@@ -26,7 +26,7 @@ def scraper(subject, semester):
         if len(decoded_line) == 0:
             continue
 
-        if decoded_line.split()[0] != "CSE":
+        if decoded_line.split()[0] != subject:
             continue
         course_name = str(decoded_line.split()[0] + decoded_line.split()[1])
 
@@ -45,7 +45,7 @@ firebase_admin.initialize_app(cred)
 
 db = firestore.client()
 
-subject_code = sys.argv[1]  # CSE
+subject_code = sys.argv[1]  # CSE, MSE, ECE
 semester_code = sys.argv[2]  # semseter number 1208
 
 course_list = scraper(subject_code, semester_code)
